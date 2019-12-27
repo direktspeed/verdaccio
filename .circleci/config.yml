@@ -68,7 +68,7 @@ jobs:
           command:  yarn run pre:ci
       - run:
           name: Build project
-          command: yarn run code:build
+          command: yarn build
       - save_cache:
           key: *yarn_cache_key
           paths:
