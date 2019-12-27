@@ -1,0 +1,21 @@
+{
+  "name": "@verdaccio/utils",
+  "version": "4.3.5-next.1",
+  "description": "verdaccio utilities",
+  "main": "./build/index.js",
+  "dependencies": {
+    "@verdaccio/dev-commons": "^4.3.5-next.1",
+    "@verdaccio/readme": "8.2.0",
+    "minimatch": "3.0.4",
+    "jsonwebtoken": "8.5.1",
+    "semver": "6.3.0",
+    "js-yaml": "3.13.1"
+  },
+  "devDependencies": {
+    "@types/minimatch": "3.0.3",
+    "@verdaccio/dev-types": "^4.3.5-next.1"
+  },
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  }
+}

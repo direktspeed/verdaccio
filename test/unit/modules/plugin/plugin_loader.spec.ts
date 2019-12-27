@@ -1,6 +1,6 @@
 import path from 'path';
-import loadPlugin from '../../../../src/lib/plugin-loader';
-import { setup }  from '../../../../src/lib/logger';
+import loadPlugin from '@verdaccio/loaders/src/plugin-loader';
+import { setup }  from '../../../../packages/logger/src/logger';
 
 setup([]);
 

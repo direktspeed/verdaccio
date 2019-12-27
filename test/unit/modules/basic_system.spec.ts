@@ -1,12 +1,12 @@
-import endPointAPI from '../../../src/api/index';
-import {API_ERROR} from '../../../src/lib/constants';
+import endPointAPI from '@verdaccio/server/src';
+import {API_ERROR} from '@verdaccio/dev-commons';
 
 import express from 'express';
 import request from 'request';
 import rimraf from 'rimraf';
 import config from '../partials/config/index';
 
-import { setup } from '../../../src/lib/logger';
+import { setup } from '../../../packages/logger/src/logger';
 
 setup([
   {type: 'stdout', format: 'pretty', level: 'trace'}

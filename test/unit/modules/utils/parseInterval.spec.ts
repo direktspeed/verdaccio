@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { parseInterval } from '../../../../src/lib/utils';
+import { parseInterval } from '@verdaccio/utils/src/utils';
 
 describe('Parse interval', () => {
   function addTest(str, res) {

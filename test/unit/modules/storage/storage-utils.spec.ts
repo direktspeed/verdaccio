@@ -1,5 +1,5 @@
-import {normalizePackage, mergeUplinkTimeIntoLocal} from "../../../../src/lib/storage-utils";
-import { STORAGE, DIST_TAGS } from '../../../../src/lib/constants';
+import {normalizePackage, mergeUplinkTimeIntoLocal} from "@verdaccio/utils/src/storage-utils";
+import { STORAGE, DIST_TAGS } from '@verdaccio/dev-commons/src/constants';
 import {readFile} from "../../../functional/lib/test.utils";
 
 import {Package} from '@verdaccio/types';

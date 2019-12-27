@@ -1,0 +1,16 @@
+{
+  "name": "@verdaccio/search",
+  "version": "4.3.5-next.1",
+  "description": "search",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "dependencies": {
+    "lunr-mutable-indexes": "2.3.2"
+  },
+  "devDependencies": {
+    "@verdaccio/types": "8.1.0",
+    "@verdaccio/dev-types": "^4.3.5-next.1"
+  }
+}

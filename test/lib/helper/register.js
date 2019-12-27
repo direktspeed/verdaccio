@@ -3,4 +3,4 @@
 require('@babel/register')({
   sourceMap: 'inline',
 });
-require('../../../src/lib/cli');
+require('@verdaccio/cli/src/cli');

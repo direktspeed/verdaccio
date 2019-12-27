@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import request from 'supertest';
 
-import {HEADER_TYPE, HEADERS, HTTP_STATUS, TOKEN_BEARER} from '../../../src/lib/constants';
-import {buildToken, encodeScopedUri} from '../../../src/lib/utils';
+import {HEADER_TYPE, HEADERS, HTTP_STATUS, TOKEN_BEARER} from '@verdaccio/dev-commons/src/constants';
+import {buildToken, encodeScopedUri} from '@verdaccio/utils/src/utils';
 import { Package } from '@verdaccio/types';
 import {getTaggedVersionFromPackage} from "./expects";
-import {generateRandomHexString} from "../../../src/lib/crypto-utils";
+import {generateRandomHexString} from "@verdaccio/utils/src/crypto-utils";
 
 // API Helpers
 

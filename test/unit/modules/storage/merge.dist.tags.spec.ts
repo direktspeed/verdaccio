@@ -1,8 +1,8 @@
 import assert from 'assert';
-let semverSort = require('../../../../src/lib/utils').semverSort;
-import {mergeVersions} from '../../../../src/lib/metadata-utils';
+let semverSort = require('@verdaccio/utils/src/utils').semverSort;
+import {mergeVersions} from '@verdaccio/store/src/metadata-utils';
 
-require('../../../../src/lib/logger').setup([]);
+require('../../../../packages/logger/src/logger').setup([]);
 
 describe('Storage._merge_versions versions', () => {
 

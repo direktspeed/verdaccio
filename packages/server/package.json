@@ -1,0 +1,17 @@
+{
+  "name": "@verdaccio/server",
+  "version": "4.3.5-next.1",
+  "description": "verdaccio server logic",
+  "main": "./build/index.js",
+  "dependencies": {
+    "@verdaccio/dev-commons": "^4.3.5-next.1",
+    "@verdaccio/logger": "^4.3.5-next.1",
+    "@verdaccio/utils": "^4.3.5-next.1"
+  },
+  "devDependencies": {
+    "@verdaccio/dev-types": "^4.3.5-next.1"
+  },
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  }
+}

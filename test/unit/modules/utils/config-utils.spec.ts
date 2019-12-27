@@ -1,14 +1,14 @@
 import path from 'path';
 import _ from 'lodash';
-import {spliceURL}  from '../../../../src/utils/string';
-import {parseConfigFile} from '../../../../src/lib/utils';
+import {spliceURL}  from '../../../../packages/utils/source/string';
+import {parseConfigFile} from '@verdaccio/utils/src/utils';
 import {
   getMatchedPackagesSpec,
   hasProxyTo,
   normalisePackageAccess, sanityCheckUplinksProps,
   uplinkSanityCheck
-} from '../../../../src/lib/config-utils';
-import {PACKAGE_ACCESS, ROLES} from '../../../../src/lib/constants';
+} from '@verdaccio/utils/src/config-utils';
+import {PACKAGE_ACCESS, ROLES} from '@verdaccio/dev-commons/src/constants';
 
 describe('Config Utilities', () => {
 

@@ -1,0 +1,9 @@
+{
+  "name": "@verdaccio/dev-commons",
+  "version": "4.3.5-next.1",
+  "description": "loaders logic",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  }
+}

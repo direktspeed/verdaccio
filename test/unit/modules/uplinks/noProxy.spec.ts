@@ -1,6 +1,6 @@
-import ProxyStorage from '../../../../src/lib/up-storage';
+import ProxyStorage from '@verdaccio/proxy/src/up-storage';
 
-require('../../../../src/lib/logger').setup([]);
+require('../../../../packages/logger/src/logger').setup([]);
 
 function setupProxy(host, uplinkConf, appConfig) {
   uplinkConf.url = host;

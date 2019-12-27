@@ -2,17 +2,17 @@ import request from 'supertest';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import { setup } from '../../../../src/lib/logger';
+import { setup } from '../../../../packages/logger/src/logger';
 
 setup([]);
 
-import { HEADERS, HTTP_STATUS } from '../../../../src/lib/constants';
+import { HEADERS, HTTP_STATUS } from '@verdaccio/dev-commons/src/constants';
 import configDefault from '../../partials/config';
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 
-require('../../../../src/lib/logger').setup([]);
+require('../../../../packages/logger/src/logger').setup([]);
 
 describe('api with no limited access configuration', () => {
   let app;

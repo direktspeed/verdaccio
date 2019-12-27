@@ -1,0 +1,15 @@
+{
+  "name": "@verdaccio/node-api",
+  "version": "4.3.5-next.1",
+  "description": "node API",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "dependencies": {
+    "@verdaccio/dev-commons": "^4.3.5-next.1",
+    "@verdaccio/logger": "^4.3.5-next.1",
+    "@verdaccio/server": "^4.3.5-next.1",
+    "@verdaccio/utils": "^4.3.5-next.1"
+  }
+}

@@ -1,12 +1,12 @@
 import _ from 'lodash';
-import Auth from '../../../../src/lib/auth';
+import Auth from '../../../../packages/auth/src/auth';
 import { authProfileConf, authPluginFailureConf, authPluginPassThrougConf } from './helper/plugin';
-import AppConfig from '../../../../src/lib/config';
-import {setup} from '../../../../src/lib/logger';
+import AppConfig from '../../../../packages/config/src/config';
+import {setup} from '../../../../packages/logger/src/logger';
 
-import {IAuth} from '../../../../types';
+import {IAuth} from '../../../../packages/types';
 import {Config} from '@verdaccio/types';
-import { ROLES } from '../../../../src/lib/constants';
+import { ROLES } from '@verdaccio/dev-commons/src/constants';
 import { getInternalError } from '@verdaccio/commons-api';
 
 setup([]);

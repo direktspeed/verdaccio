@@ -1,4 +1,4 @@
-import {DEFAULT_NO_README, HTTP_STATUS} from '../../../src/lib/constants';
+import {DEFAULT_NO_README, HTTP_STATUS} from '@verdaccio/dev-commons/src/constants';
 
 import pkgReadmeJSON from './pkg-readme.json';
 import pkgNoReadmeJSON from './pkg-no-readme.json';

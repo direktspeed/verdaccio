@@ -17,9 +17,9 @@ import {
 } from '@verdaccio/types';
 import { UploadTarball, ReadTarball} from '@verdaccio/streams';
 
-import Config from '../../../../src/lib/config';
-import {logger} from '../../../../src/lib/logger';
-import {generatePackageTemplate} from '../../../../src/lib/storage-utils';
+import Config from '../../../../packages/config/src/config';
+import {logger} from '../../../../packages/logger/src/logger';
+import {generatePackageTemplate} from '@verdaccio/utils/src/storage-utils';
 
 class PackageStorage implements IPackageStorageManager {
   path: string;

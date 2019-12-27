@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import smartRequest, {PromiseAssert} from '../../lib/request';
 import {mockServer} from '../__helper/mock';
-import {HTTP_STATUS} from '../../../src/lib/constants';
+import {HTTP_STATUS} from '@verdaccio/dev-commons/src/constants';
 import { IRequestPromise } from '../../types';
 import { VerdaccioError } from '@verdaccio/commons-api';
 

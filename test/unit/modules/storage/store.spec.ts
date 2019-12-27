@@ -2,13 +2,13 @@ import path from 'path';
 import fs from 'fs';
 import rimraf from 'rimraf';
 import configExample from '../../partials/config';
-import AppConfig from '../../../../src/lib/config';
-import Storage from '../../../../src/lib/storage';
-import {setup} from '../../../../src/lib/logger';
+import AppConfig from '../../../../packages/config/src/config';
+import Storage from '@verdaccio/store/src/storage';
+import {setup} from '../../../../packages/logger/src/logger';
 
 import {Config} from '@verdaccio/types';
-import {IStorageHandler} from '../../../../types';
-import {API_ERROR, HTTP_STATUS} from '../../../../src/lib/constants';
+import {IStorageHandler} from '../../../../packages/types';
+import {API_ERROR, HTTP_STATUS} from '@verdaccio/dev-commons/src/constants';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 

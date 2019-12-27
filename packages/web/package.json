@@ -1,0 +1,12 @@
+{
+  "name": "@verdaccio/web",
+  "version": "4.3.5-next.1",
+  "description": "web ui middleware",
+  "main": "./build/index.js",
+  "dependencies": {
+    "@verdaccio/loaders": "^4.3.5-next.1"
+  },
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  }
+}

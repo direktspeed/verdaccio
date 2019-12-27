@@ -5,14 +5,14 @@ import rimraf from 'rimraf';
 import configDefault from '../../partials/config';
 import publishMetadata from '../../partials/publish-api';
 import forbiddenPlace from '../../partials/forbidden-place';
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 
-import { HEADERS, API_ERROR, HTTP_STATUS, HEADER_TYPE, DIST_TAGS} from '../../../../src/lib/constants';
+import { HEADERS, API_ERROR, HTTP_STATUS, HEADER_TYPE, DIST_TAGS} from '@verdaccio/dev-commons/src/constants';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 import {mockServer} from '../../__helper/mock';
 import {addUser} from '../../__helper/api';
 
-require('../../../../src/lib/logger').setup([]);
+require('../../../../packages/logger/src/logger').setup([]);
 
 const credentials = { name: 'user-web', password: 'secretPass' };
 describe('endpoint web unit test', () => {

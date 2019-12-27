@@ -1,8 +1,8 @@
-import Search from '../../../../src/lib/search';
-import Config from '../../../../src/lib/config';
-import Storage from '../../../../src/lib/storage';
+import Search from '@verdaccio/search/src/search';
+import Config from '../../../../packages/config/src/config';
+import Storage from '@verdaccio/store/src/storage';
 import buildConfig from '../../partials/config';
-import { setup } from '../../../../src/lib/logger';
+import { setup } from '../../../../packages/logger/src/logger';
 
 setup([]);
 

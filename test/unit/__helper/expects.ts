@@ -1,4 +1,4 @@
-import {DIST_TAGS, LATEST} from "../../../src/lib/constants";
+import {DIST_TAGS, LATEST} from "@verdaccio/dev-commons/src/constants";
 
 
 /**

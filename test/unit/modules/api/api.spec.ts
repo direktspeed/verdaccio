@@ -5,7 +5,7 @@ import rimraf from 'rimraf';
 
 import configDefault from '../../partials/config';
 import publishMetadata from '../../partials/publish-api';
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 
 import {
   HEADERS,
@@ -14,10 +14,10 @@ import {
   HEADER_TYPE,
   API_MESSAGE,
   TOKEN_BEARER,
-} from '../../../../src/lib/constants';
+} from '@verdaccio/dev-commons/src/constants';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import {buildToken, encodeScopedUri} from '../../../../src/lib/utils';
+import {buildToken, encodeScopedUri} from '@verdaccio/utils/src/utils';
 import {
   getNewToken,
   putPackage,
@@ -25,7 +25,7 @@ import {
 } from '../../__helper/api';
 import {generatePackageMetadata, generatePackageUnpublish, generateStarMedatada} from '../../__helper/utils';
 
-require('../../../../src/lib/logger').setup([
+require('../../../../packages/logger/src/logger').setup([
   { type: 'stdout', format: 'pretty', level: 'warn' }
 ]);
 

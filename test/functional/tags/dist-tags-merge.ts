@@ -1,7 +1,7 @@
 import {generateSha} from '../lib/test.utils';
-import {API_MESSAGE, HTTP_STATUS} from '../../../src/lib/constants';
+import {API_MESSAGE, HTTP_STATUS} from '@verdaccio/dev-commons/src/constants';
 import {DOMAIN_SERVERS, PORT_SERVER_1, PORT_SERVER_2, PORT_SERVER_3} from '../config.functional';
-import {DIST_TAGS} from '../../../src/lib/constants';
+import {DIST_TAGS} from '@verdaccio/dev-commons/src/constants';
 import pkgExample from './dist-tags-merge.json';
 
 export default function(server, server2, server3) {

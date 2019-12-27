@@ -1,5 +1,5 @@
 // we need this for notifications
-import { setup } from '../../src/lib/logger';
+import { setup } from '../../packages/logger/src/logger';
 
 setup([]);
 

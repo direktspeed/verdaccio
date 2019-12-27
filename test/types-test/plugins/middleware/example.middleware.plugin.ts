@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 
-import Config from '../../../../src/lib/config';
-import {generatePackageTemplate} from '../../../../src/lib/storage-utils';
+import Config from '../../../../packages/config/src/config';
+import {generatePackageTemplate} from '@verdaccio/utils/src/storage-utils';
 import {readFile} from '../../../functional/lib/test.utils';
 import { Package } from '@verdaccio/types';
 

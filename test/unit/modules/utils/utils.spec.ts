@@ -1,5 +1,4 @@
-import {generateGravatarUrl, GENERIC_AVATAR } from '../../../../src/utils/user';
-import { spliceURL } from '../../../../src/utils/string';
+import { generateGravatarUrl, GENERIC_AVATAR, spliceURL } from '@verdaccio/utils/src';
 import {
   validateName,
   convertDistRemoteToLocalTarballUrls,
@@ -15,9 +14,9 @@ import {
   sortByName,
   formatAuthor,
   isHTTPProtocol,
-} from '../../../../src/lib/utils';
-import { DIST_TAGS, DEFAULT_USER } from '../../../../src/lib/constants';
-import { logger, setup } from '../../../../src/lib/logger';
+} from '@verdaccio/utils/src/utils';
+import { DIST_TAGS, DEFAULT_USER } from '@verdaccio/dev-commons';
+import { logger, setup } from '@verdaccio/logger';
 import { readFile } from '../../../functional/lib/test.utils';
 
 const readmeFile = (fileName = 'markdown.md') =>

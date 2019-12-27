@@ -1,0 +1,12 @@
+{
+  "name": "@verdaccio/config",
+  "version": "4.3.5-next.1",
+  "description": "logger",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "devDependencies": {
+    "@types/bunyan": "1.8.6"
+  }
+}

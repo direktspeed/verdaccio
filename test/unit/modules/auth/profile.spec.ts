@@ -3,13 +3,13 @@ import _ from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 import {mockServer} from '../../__helper/mock';
-import {parseConfigFile} from '../../../../src/lib/utils';
+import {parseConfigFile} from '@verdaccio/utils/src/utils';
 import {parseConfigurationFile} from '../../__helper';
 import {getNewToken, getProfile, postProfile} from '../../__helper/api';
-import {setup} from '../../../../src/lib/logger';
-import {API_ERROR, HTTP_STATUS, SUPPORT_ERRORS} from '../../../../src/lib/constants';
+import {setup} from '../../../../packages/logger/src/logger';
+import {API_ERROR, HTTP_STATUS, SUPPORT_ERRORS} from '@verdaccio/dev-commons/src/constants';
 
 setup([]);
 

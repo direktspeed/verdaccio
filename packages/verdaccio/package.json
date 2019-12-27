@@ -1,0 +1,101 @@
+{
+  "name": "verdaccio",
+  "version": "4.3.5-next.1",
+  "description": "A lightweight private npm proxy registry",
+  "main": "build/index.js",
+  "bin": {
+    "verdaccio": "./bin/verdaccio"
+  },
+  "scripts": {
+    "release": "standard-version -a -s",
+    "prepublish": "in-publish && npm run code:build || not-in-publish",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "pretest": "npm run code:build",
+    "test": "npm run test:unit",
+    "test:clean": "npx jest --clearCache",
+    "test:unit": "cross-env NODE_ENV=test BABEL_ENV=test TZ=UTC FORCE_COLOR=1 jest --config ./jest.config.js --maxWorkers 2 --passWithNoTests",
+    "test:functional": "cross-env NODE_ENV=test jest --config ./test/jest.config.functional.js --testPathPattern ./test/functional/index* --passWithNoTests",
+    "test:e2e": "cross-env BABEL_ENV=test jest --config ./test/jest.config.e2e.js",
+    "test:all": "npm run test && npm run test:functional && npm run test:e2e",
+    "pre:ci": "npm run lint",
+    "coverage:publish": "codecov",
+    "lint": "npm run type-check && npm run lint:ts && npm run lint:lockfile",
+    "lint:ts": "eslint . --ext .js,.ts",
+    "lint:lockfile": "lockfile-lint --path yarn.lock --type yarn --validate-https --allowed-hosts verdaccio npm yarn",
+    "format": "prettier --single-quote --trailing-comma none --write \"{src,test}/**/*.ts\"",
+    "dev:start": "cross-env BABEL_ENV=registry babel-node --extensions \".ts,.tsx\" src/lib/cli",
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline",
+    "code:build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline",
+    "code:docker-build": "cross-env BABEL_ENV=registry-docker babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\"",
+    "build:docker": "docker build -t verdaccio/verdaccio:local . --no-cache"
+  },
+  "author": {
+    "name": "Verdaccio Maintainers",
+    "email": "verdaccio.npm@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/verdaccio/verdaccio"
+  },
+  "homepage": "https://verdaccio.org",
+  "bin": {
+    "verdaccio": "./bin/verdaccio"
+  },
+  "dependencies": {
+    "@verdaccio/cli": "^4.3.5-next.1",
+    "@verdaccio/node-api": "^4.3.5-next.1"
+  },
+  "keywords": [
+    "private",
+    "package",
+    "repository",
+    "registry",
+    "enterprise",
+    "modules",
+    "proxy",
+    "server",
+    "verdaccio"
+  ],
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "preferGlobal": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "relative": true,
+    "linters": {
+      "*.yaml": [
+        "prettier --parser yaml --no-config --single-quote --write",
+        "detect-secrets-launcher --baseline .secrets-baseline",
+        "git add"
+      ],
+      "*": [
+        "eslint .",
+        "prettier --write",
+        "detect-secrets-launcher --baseline .secrets-baseline",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "*.json"
+    ]
+  },
+  "license": "MIT",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/verdaccio",
+    "logo": "https://opencollective.com/verdaccio/logo.txt"
+  }
+}

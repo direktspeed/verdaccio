@@ -1,20 +1,20 @@
 import rimRaf from 'rimraf';
 import path from 'path';
 
-import LocalStorage from '../../../../src/lib/local-storage';
-import AppConfig from '../../../../src/lib/config';
+import LocalStorage from '@verdaccio/store/src/local-storage';
+import AppConfig from '../../../../packages/config/src/config';
 // @ts-ignore
 import configExample from '../../partials/config';
-import { logger, setup} from '../../../../src/lib/logger';
+import { logger, setup} from '../../../../packages/logger/src/logger';
 import {readFile} from '../../../functional/lib/test.utils';
-import {generatePackageTemplate} from '../../../../src/lib/storage-utils';
+import {generatePackageTemplate} from '@verdaccio/utils/src/storage-utils';
 import {generateNewVersion} from '../../../lib/utils-test';
 
 const readMetadata = (fileName = 'metadata') => readFile(`../../unit/partials/${fileName}`).toString();
 
 import {Config, MergeTags, Package} from '@verdaccio/types';
-import {IStorage} from '../../../../types';
-import { API_ERROR, HTTP_STATUS, DIST_TAGS} from '../../../../src/lib/constants';
+import {IStorage} from '../../../../packages/types';
+import { API_ERROR, HTTP_STATUS, DIST_TAGS} from '@verdaccio/dev-commons/src/constants';
 import { VerdaccioError } from '@verdaccio/commons-api';
 
 setup([]);

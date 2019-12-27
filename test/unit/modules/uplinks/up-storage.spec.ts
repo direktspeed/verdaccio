@@ -1,12 +1,12 @@
 import _ from 'lodash';
-import ProxyStorage from '../../../../src/lib/up-storage';
-import AppConfig from '../../../../src/lib/config';
+import ProxyStorage from '@verdaccio/proxy/src/up-storage';
+import AppConfig from '../../../../packages/config/src/config';
 import configExample from '../../partials/config';
-import {setup} from '../../../../src/lib/logger';
+import {setup} from '../../../../packages/logger/src/logger';
 
 import {Config, UpLinkConf} from '@verdaccio/types';
-import {IProxy} from '../../../../types';
-import {API_ERROR, HTTP_STATUS} from "../../../../src/lib/constants";
+import {IProxy} from '../../../../packages/types';
+import {API_ERROR, HTTP_STATUS} from "@verdaccio/dev-commons/src/constants";
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 import { VerdaccioError } from '@verdaccio/commons-api';

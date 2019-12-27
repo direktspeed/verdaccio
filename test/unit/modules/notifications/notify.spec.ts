@@ -1,10 +1,10 @@
 import {parseConfigurationFile} from '../../__helper';
-import {parseConfigFile} from '../../../../src/lib/utils';
-import {notify} from '../../../../src/lib/notify';
+import {parseConfigFile} from '@verdaccio/utils/src/utils';
+import {notify} from '@verdaccio/hooks/src';
 
-import {notifyRequest} from '../../../../src/lib/notify/notify-request';
+import {notifyRequest} from '@verdaccio/hooks/src/notify-request';
 
-import { setup } from '../../../../src/lib/logger';
+import { setup } from '../../../../packages/logger/src/logger';
 
 setup([]);
 

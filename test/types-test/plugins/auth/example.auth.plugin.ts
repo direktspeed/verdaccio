@@ -1,7 +1,7 @@
 // this file is not aim to be tested, just to check flow definitions
 
-import Config from '../../../../src/lib/config';
-import { logger } from '../../../../src/lib/logger';
+import Config from '../../../../packages/config/src/config';
+import { logger } from '../../../../packages/logger/src/logger';
 import { Callback } from '@verdaccio/types';
 
 import { Config as AppConfig, PackageAccess, IPluginAuth, RemoteUser, Logger, PluginOptions } from '@verdaccio/types';

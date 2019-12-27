@@ -2,16 +2,16 @@ import request from 'supertest';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 
-import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '../../../../src/lib/constants';
+import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '@verdaccio/dev-commons/src/constants';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import {buildToken} from '../../../../src/lib/utils';
+import {buildToken} from '@verdaccio/utils/src/utils';
 import {addUser, getPackage, loginUserToken} from '../../__helper/api';
-import {setup} from '../../../../src/lib/logger';
+import {setup} from '../../../../packages/logger/src/logger';
 import configDefault from '../../partials/config';
-import {buildUserBuffer} from '../../../../src/lib/auth-utils';
+import {buildUserBuffer} from '../../../../packages/utils/src/auth-utils';
 
 setup([]);
 const credentials = { name: 'JotaJWT', password: 'secretPass' };

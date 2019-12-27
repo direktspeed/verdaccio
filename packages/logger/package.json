@@ -1,0 +1,19 @@
+{
+  "name": "@verdaccio/logger",
+  "version": "4.3.5-next.1",
+  "description": "logger",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "dependencies": {
+    "@verdaccio/utils": "4.3.5-next.1",
+    "bunyan": "1.8.12",
+    "dayjs": "1.8.17",
+    "kleur": "3.0.3",
+    "http-errors": "1.7.3"
+  },
+  "devDependencies": {
+    "@types/bunyan": "1.8.6"
+  }
+}

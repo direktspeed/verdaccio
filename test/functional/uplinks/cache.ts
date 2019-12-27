@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { readFile } from '../lib/test.utils';
-import {HTTP_STATUS} from "../../../src/lib/constants";
+import {HTTP_STATUS} from "@verdaccio/dev-commons/src/constants";
 import {TARBALL} from '../config.functional';
-import { createTarballHash } from '../../../src/lib/crypto-utils';
+import { createTarballHash } from '@verdaccio/utils/src/crypto-utils';
 import requirePackage from '../fixtures/package';
 
 function getBinary() {

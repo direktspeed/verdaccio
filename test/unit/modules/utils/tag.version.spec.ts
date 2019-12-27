@@ -1,7 +1,7 @@
 import assert from 'assert';
-import { tagVersion } from '../../../../src/lib/utils';
+import { tagVersion } from '@verdaccio/utils/src/utils';
 
-import { setup } from '../../../../src/lib/logger';
+import { setup } from '../../../../packages/logger/src/logger';
 
 setup([]);
 

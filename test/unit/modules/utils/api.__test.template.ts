@@ -11,13 +11,13 @@ import _ from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import endPointAPI from '../../../../src/api/index';
+import endPointAPI from '../../../../packages/server/src/server';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import {parseConfigFile} from '../../../../src/lib/utils';
+import {parseConfigFile} from '@verdaccio/utils/src/utils';
 import {parseConfigurationFile} from '../../__helper';
 import {addUser} from '../../__helper/api';
-import {setup} from '../../../../src/lib/logger';
+import {setup} from '../../../../packages/logger/src/logger';
 
 // we must start logging without output
 setup([]);

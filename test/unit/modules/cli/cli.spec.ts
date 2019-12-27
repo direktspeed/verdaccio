@@ -1,12 +1,12 @@
 import path from 'path';
 import _ from 'lodash';
 
-import startServer from '../../../../src';
+import startServer from '../../../../packages/verdaccio/src';
 import config from '../../partials/config';
-import {DEFAULT_DOMAIN, DEFAULT_PORT, DEFAULT_PROTOCOL} from '../../../../src/lib/constants';
-import {getListListenAddresses} from '../../../../src/lib/cli/utils';
-import {parseConfigFile} from '../../../../src/lib/utils';
-import { logger } from '../../../../src/lib/logger';
+import {DEFAULT_DOMAIN, DEFAULT_PORT, DEFAULT_PROTOCOL} from '@verdaccio/dev-commons/src/constants';
+import {getListListenAddresses} from '../../../../packages/cli/src/cli/utils';
+import {parseConfigFile} from '@verdaccio/utils/src/utils';
+import { logger } from '../../../../packages/logger/src/logger';
 
 jest.mock('../../../../src/lib/logger', () => ({
   setup: jest.fn(),

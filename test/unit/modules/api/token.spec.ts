@@ -4,19 +4,19 @@ import rimraf from 'rimraf';
 import _ from 'lodash';
 
 import configDefault from '../../partials/config';
-import endPointAPI from '../../../../src/api';
+import endPointAPI from 'verdaccio/src/server';
 
 import {
   HEADERS,
   HTTP_STATUS,
   HEADER_TYPE, TOKEN_BEARER, API_ERROR, SUPPORT_ERRORS,
-} from '../../../../src/lib/constants';
+} from '@verdaccio/dev-commons/src/constants';
 import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 import { getNewToken } from '../../__helper/api';
-import {buildToken} from "../../../../src/lib/utils";
+import {buildToken} from "@verdaccio/utils/src/utils";
 
-require('../../../../src/lib/logger').setup([
+require('../../../../packages/logger/src/logger').setup([
   { type: 'stdout', format: 'pretty', level: 'trace' }
 ]);
 
