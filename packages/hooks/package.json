@@ -3,7 +3,18 @@
   "version": "4.3.5-next.1",
   "description": "loaders logic",
   "main": "./build/index.js",
+  "dependencies": {
+    "request": "^2.88.0",
+    "@verdaccio/logger": "4.3.5-next.1",
+    "handlebars": "^4.5.3",
+    "@verdaccio/commons-api": "^8.5.0"
+  },
+  "devDependencies": {
+    "@verdaccio/types": "^8.5.2",
+    "@verdaccio/dev-commons": "4.3.5-next.1"
+  },
   "scripts": {
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest",
     "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
   }
 }

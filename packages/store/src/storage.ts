@@ -5,18 +5,17 @@ import Stream from 'stream';
 import { ProxyStorage } from '@verdaccio/proxy';
 import Search from '@verdaccio/search';
 import { API_ERROR, HTTP_STATUS, DIST_TAGS } from '@verdaccio/dev-commons';
-import LocalStorage from './local-storage';
 import { ReadTarball } from '@verdaccio/streams';
-import { checkPackageLocal, publishPackage, checkPackageRemote, cleanUpLinksRef, mergeUplinkTimeIntoLocal, generatePackageTemplate } from '@verdaccio/utils';
+import { ErrorCode, normalizeDistTags, validateMetadata, isObject, checkPackageLocal, publishPackage, checkPackageRemote, cleanUpLinksRef, hasProxyTo, mergeUplinkTimeIntoLocal, generatePackageTemplate } from '@verdaccio/utils';
 import { setupUpLinks, updateVersionsHiddenUpLink } from '@verdaccio/proxy';
-import { mergeVersions } from './metadata-utils';
-import { ErrorCode, normalizeDistTags, validateMetadata, isObject } from '@verdaccio/utils';
-import { IStorage, IProxy, IStorageHandler, ProxyList, StringValue, IGetPackageOptions, ISyncUplinks, IPluginFilters } from '@verdaccio/dev-types';
 import { IReadTarball, IUploadTarball, Versions, Package, Config, MergeTags, Version, DistFile, Callback, Logger } from '@verdaccio/types';
-import { hasProxyTo } from '@verdaccio/utils';
-import { logger } from '@verdaccio/logger';
+import { IStorage, IProxy, IStorageHandler, ProxyList, StringValue, IGetPackageOptions, ISyncUplinks, IPluginFilters } from '@verdaccio/dev-types';
 import { GenericBody, TokenFilter, Token } from '@verdaccio/types';
+import { logger } from '@verdaccio/logger';
 import { VerdaccioError } from '@verdaccio/commons-api';
+
+import LocalStorage from './local-storage';
+import { mergeVersions } from './metadata-utils';
 
 class Storage implements IStorageHandler {
   public localStorage: IStorage;

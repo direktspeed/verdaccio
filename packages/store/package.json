@@ -4,11 +4,12 @@
   "description": "loaders logic",
   "main": "./build/index.js",
   "scripts": {
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest",
     "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
   },
   "dependencies": {
-    "@verdaccio/local-storage": "8.2.0",
-    "@verdaccio/streams": "8.2.0",
+    "@verdaccio/local-storage": "^8.5.0",
+    "@verdaccio/streams": "^8.5.0",
     "async": "3.1.0"
   }
 }

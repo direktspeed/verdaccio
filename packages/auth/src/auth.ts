@@ -13,11 +13,12 @@ import {
   isAuthHeaderValid,
   getSecurity,
   isAESLegacy,
+  convertPayloadToBase64,
+  ErrorCode,
   parseAuthTokenHeader,
   parseBasicPayload,
   createRemoteUser,
 } from '@verdaccio/utils';
-import { convertPayloadToBase64, ErrorCode } from '@verdaccio/utils';
 
 import { getMatchedPackagesSpec } from '@verdaccio/utils';
 import { Config, Logger, Callback, IPluginAuth, RemoteUser, JWTSignOptions, Security, AuthPluginPackage, AllowAccess, PackageAccess } from '@verdaccio/types';

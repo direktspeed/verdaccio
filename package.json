@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "2.12.0",
     "@verdaccio/babel-preset": "^8.5.0",
     "@verdaccio/eslint-config": "^8.5.0",
-    "@verdaccio/types": "^8.5.0",
+    "@verdaccio/types": "^8.5.2",
     "codecov": "3.6.1",
     "cross-env": "6.0.3",
     "detect-secrets": "1.0.5",
@@ -39,17 +39,17 @@
     "get-stdin": "7.0.0",
     "husky": "2.7.0",
     "in-publish": "2.0.0",
-    "jest": "24.9.0",
-    "jest-environment-node": "24.9.0",
-    "jest-junit": "9.0.0",
-    "lerna": "3.18.4",
+    "jest": "^24.9.0",
+    "jest-environment-node": "^24.9.0",
+    "jest-junit": "^9.0.0",
+    "lerna": "^3.18.4",
     "lint-staged": "8.2.1",
     "nock": "11.7.0",
-    "prettier": "1.19.1",
+    "prettier": "^1.19.1",
     "puppeteer": "1.8.0",
     "rimraf": "3.0.0",
-    "standard-version": "7.0.1",
-    "supertest": "4.0.2",
+    "standard-version": "^7.0.1",
+    "supertest": "^4.0.2",
     "typescript": "3.7.1-rc",
     "verdaccio-auth-memory": "^8.5.0",
     "verdaccio-memory": "^8.5.0"
@@ -64,6 +64,7 @@
     "release:prerelease": "lerna version --conventional-commits --conventional-prerelease --preid next",
     "release:publish": "lerna publish from-git",
     "release:publish-prerelease": "lerna publish from-git --pre-dist-tag next",
-    "lint": "eslint \"packages/**/@(src|tests)/**\""
+    "lint": "eslint \"packages/**/@(src|tests)/**\"",
+    "test": "lerna run test --no-bail"
   }
 }

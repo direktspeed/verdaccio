@@ -6,6 +6,10 @@
   "bin": {
     "verdaccio": "./bin/verdaccio"
   },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/verdaccio"
+  },
   "scripts": {
     "release": "standard-version -a -s",
     "prepublish": "in-publish && npm run code:build || not-in-publish",
@@ -39,9 +43,6 @@
     "url": "git://github.com/verdaccio/verdaccio"
   },
   "homepage": "https://verdaccio.org",
-  "bin": {
-    "verdaccio": "./bin/verdaccio"
-  },
   "dependencies": {
     "@verdaccio/cli": "^4.3.5-next.1",
     "@verdaccio/node-api": "^4.3.5-next.1"

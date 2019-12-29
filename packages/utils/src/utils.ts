@@ -1,12 +1,12 @@
 import fs from 'fs';
 import assert from 'assert';
 import URL from 'url';
-
 import _ from 'lodash';
 import semver from 'semver';
 import YAML from 'js-yaml';
-import sanitizyReadme from '@verdaccio/readme';
+import { Request } from 'express';
 
+import sanitizyReadme from '@verdaccio/readme';
 import {
   APP_ERROR,
   DEFAULT_PORT,
@@ -17,11 +17,11 @@ import {
   DIST_TAGS,
   DEFAULT_USER,
 } from '@verdaccio/dev-commons';
-import { generateGravatarUrl, GENERIC_AVATAR } from './user';
 
 import { Package, Version, Author } from '@verdaccio/types';
-import { Request } from 'express';
 import { StringValue, AuthorAvatar } from '@verdaccio/dev-types';
+
+import { generateGravatarUrl, GENERIC_AVATAR } from './user';
 import { normalizeContributors } from './storage-utils';
 import {
   getConflict,
@@ -34,6 +34,7 @@ import {
   getNotFound,
   getCode,
 } from '@verdaccio/commons-api';
+
 import { IncomingHttpHeaders } from 'http2';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -281,12 +282,13 @@ export function parseAddress(urlAddress: any): any {
  * Function filters out bad semver versions and sorts the array.
  * @return {Array} sorted Array
  */
-export function semverSort(listVersions: string[], logger): string[] {
+export function semverSort(listVersions: string[], /* logger */): string[] {
   return (
     listVersions
       .filter(function(x): boolean {
         if (!semver.parse(x, true)) {
-          logger.warn({ ver: x }, 'ignoring bad version @{ver}');
+          // FIXME: logger is always undefined
+          // logger.warn({ ver: x }, 'ignoring bad version @{ver}');
           return false;
         }
         return true;

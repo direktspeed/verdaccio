@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import Path from 'path';
 import { logger } from '@verdaccio/logger';
@@ -52,8 +53,8 @@ function createConfigFile(configLocation: any): SetupDirectory {
   return configLocation;
 }
 
-function readDefaultConfig(): Buffer {
-  const pathDefaultConf: string = require.resolve('../conf/default.yaml');
+export function readDefaultConfig(): Buffer {
+  const pathDefaultConf: string = path.resolve(__dirname, 'conf/default.yaml');
 
   return fs.readFileSync(pathDefaultConf, CHARACTER_ENCODING.UTF8);
 }
