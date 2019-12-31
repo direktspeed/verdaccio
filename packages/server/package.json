@@ -9,9 +9,12 @@
     "@verdaccio/utils": "^4.3.5-next.1"
   },
   "devDependencies": {
-    "@verdaccio/dev-types": "^4.3.5-next.1"
+    "@verdaccio/dev-types": "^4.3.5-next.1",
+    "@verdaccio/mock": "^4.3.5-next.1",
+    "request": "2.87.0"
   },
   "scripts": {
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest",
     "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
   }
 }

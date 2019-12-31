@@ -1,12 +1,13 @@
-import endPointAPI from '@verdaccio/server';
-import {API_ERROR} from '@verdaccio/dev-commons';
-import { setup } from '@verdaccio/logger';
-
 import express from 'express';
 import request from 'request';
 import rimraf from 'rimraf';
+import path from "path";
 
-import config from '../partials/config/index';
+import {API_ERROR} from '@verdaccio/dev-commons';
+import {parseConfigFile} from "@verdaccio/utils";
+import { setup } from '@verdaccio/logger';
+
+import endPointAPI from '../src';
 
 setup([
   {type: 'stdout', format: 'pretty', level: 'trace'}
@@ -14,6 +15,10 @@ setup([
 
 const app = express();
 const server = require('http').createServer(app);
+
+const parseConfigurationFile = (conf) => {
+  return path.join(__dirname, `./partials/config/yaml/${conf}`);
+};
 
 describe('basic system test', () => {
   let port;
@@ -24,9 +29,8 @@ describe('basic system test', () => {
   });
 
   beforeAll(async function(done) {
-
-    app.use(await endPointAPI(config()));
-
+    const config = parseConfigFile(parseConfigurationFile('basic.yaml'));
+    app.use(await endPointAPI(config));
     server.listen(0, function() {
       port = server.address().port;
       done();
@@ -49,10 +53,11 @@ describe('basic system test', () => {
 
   test('server should respond on /___not_found_package', done => {
     request({
+      json: true,
       url: `http://localhost:${port}/___not_found_package`,
     }, function(err, res, body) {
-      expect(err).toBeNull();
-      expect(body).toMatch(API_ERROR.NO_PACKAGE);
+       expect(err).toBeNull();
+       expect(body.error).toMatch(API_ERROR.NO_PACKAGE);
       done();
     });
   });

@@ -4,6 +4,7 @@
   "description": "web ui middleware",
   "main": "./build/index.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "@verdaccio/loaders": "^4.3.5-next.1"
   },
   "scripts": {

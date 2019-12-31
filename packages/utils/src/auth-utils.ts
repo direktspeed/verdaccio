@@ -7,6 +7,8 @@ import { RemoteUser, Package, Callback, Config, Security, APITokenOptions, JWTOp
 import { convertPayloadToBase64, ErrorCode } from './utils';
 import { aesDecrypt, verifyPayload } from './crypto-utils';
 
+import { logger } from '@verdaccio/logger';
+
 export function validatePassword(password: string, minLength: number = DEFAULT_MIN_LIMIT_PASSWORD): boolean {
   return typeof password === 'string' && password.length >= minLength;
 }
@@ -39,7 +41,7 @@ export function createAnonymousRemoteUser(): RemoteUser {
   };
 }
 
-export function allow_action(action: string, logger): Function {
+export function allow_action(action: string): Function {
   return function(user: RemoteUser, pkg: Package, callback: Callback): void {
     logger.trace({remote: user.name}, `[auth/allow_action]: user: @{user.name}`);
     const { name, groups } = user;
