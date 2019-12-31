@@ -1,5 +1,5 @@
-import { fillInMsgTemplate } from "../../../../packages/logger/src/formatter";
-import {LOG_VERDACCIO_ERROR, LOG_VERDACCIO_BYTES} from "../../../../packages/middleware/src/middleware";
+import { fillInMsgTemplate } from "../src/formatter";
+import {LOG_VERDACCIO_ERROR, LOG_VERDACCIO_BYTES} from "@verdaccio/middleware";
 import { HTTP_STATUS } from "@verdaccio/commons-api";
 
 // the following mocks avoid use colors, thus the strings can be matched

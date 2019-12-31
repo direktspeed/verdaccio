@@ -4,7 +4,7 @@ import { Response, Router } from 'express';
 import { USERS, HTTP_STATUS } from '@verdaccio/dev-commons';
 import { Package } from '@verdaccio/types';
 
-import { $RequestExtend, $NextFunctionVer, IStorageHandler } from '../../types';
+import { $RequestExtend, $NextFunctionVer, IStorageHandler } from '@verdaccio/dev-types';
 
 type Packages = Package[];
 

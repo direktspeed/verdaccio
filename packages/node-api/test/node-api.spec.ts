@@ -1,14 +1,16 @@
 import path from 'path';
 import _ from 'lodash';
 
-import startServer from '../../../../packages/verdaccio/src';
-import config from '../../partials/config';
-import {DEFAULT_DOMAIN, DEFAULT_PORT, DEFAULT_PROTOCOL} from '@verdaccio/dev-commons/src/constants';
-import {getListListenAddresses} from '../../../../packages/cli/src/cli/utils';
+import { configExample } from '@verdaccio/mock';
+import {DEFAULT_DOMAIN, DEFAULT_PORT, DEFAULT_PROTOCOL} from '@verdaccio/dev-commons';
 import {parseConfigFile} from '@verdaccio/utils';
-import { logger } from '../../../../packages/logger/src/logger';
 
-jest.mock('../../../../src/lib/logger', () => ({
+import { getListListenAddresses } from '../src/cli-utils';
+import { logger } from '@verdaccio/logger';
+
+import { startVerdaccio } from '../src';
+
+jest.mock('@verdaccio/logger', () => ({
   setup: jest.fn(),
   logger: {
     child: jest.fn(),
@@ -23,7 +25,7 @@ jest.mock('../../../../src/lib/logger', () => ({
 describe('startServer via API', () => {
 
   const parseConfigurationFile = (name) => {
-    return parseConfigFile(path.join(__dirname, `../../partials/config/yaml/${name}.yaml`));
+    return parseConfigFile(path.join(__dirname, `./partials/config/yaml/${name}.yaml`));
   };
 
   describe('startServer launcher', () => {
@@ -33,7 +35,7 @@ describe('startServer via API', () => {
       const version = '1.0.0';
       const port = '6000';
 
-      await startServer(config(), port, store, version, serverName,
+      await startVerdaccio(configExample(), port, store, version, serverName,
         (webServer, addrs, pkgName, pkgVersion) => {
           expect(webServer).toBeDefined();
           expect(addrs).toBeDefined();
@@ -54,7 +56,7 @@ describe('startServer via API', () => {
       const version = '1.0.0';
       const port = '6100';
 
-      await startServer(config(parseConfigurationFile('server/keepalivetimeout-0')), port, store, version, serverName,
+      await startVerdaccio(configExample(parseConfigurationFile('server/keepalivetimeout-0')), port, store, version, serverName,
         (webServer, addrs, pkgName, pkgVersion) => {
           expect(webServer).toBeDefined();
           expect(webServer.keepAliveTimeout).toBeDefined();
@@ -77,7 +79,7 @@ describe('startServer via API', () => {
       const version = '1.0.0';
       const port = '6200';
 
-      await startServer(config(parseConfigurationFile('server/keepalivetimeout-60')), port, store, version, serverName,
+      await startVerdaccio(configExample(parseConfigurationFile('server/keepalivetimeout-60')), port, store, version, serverName,
         (webServer, addrs, pkgName, pkgVersion) => {
           expect(webServer).toBeDefined();
           expect(webServer.keepAliveTimeout).toBeDefined();
@@ -100,7 +102,7 @@ describe('startServer via API', () => {
       const version = '1.0.0';
       const port = '6300';
 
-      await startServer(config(parseConfigurationFile('server/keepalivetimeout-undefined')), port, store, version, serverName,
+      await startVerdaccio(configExample(parseConfigurationFile('server/keepalivetimeout-undefined')), port, store, version, serverName,
         (webServer, addrs, pkgName, pkgVersion) => {
           expect(webServer).toBeDefined();
           expect(webServer.keepAliveTimeout).toBeDefined();
@@ -124,13 +126,13 @@ describe('startServer via API', () => {
       const address = 'https://www.domain.com:443';
       const realProcess = process;
 
-      const conf = config();
+      const conf = configExample();
       conf.https = {};
       // save process to catch exist
       const exitMock = jest.fn();
       // @ts-ignore
       global.process = { ...realProcess, exit: exitMock };
-      await startServer(conf, address, store, version, serverName, () => {
+      await startVerdaccio(conf, address, store, version, serverName, () => {
         expect(logger.fatal).toHaveBeenCalled();
         expect(logger.fatal).toHaveBeenCalledTimes(2);
         done();
@@ -143,7 +145,7 @@ describe('startServer via API', () => {
     test('should fails if config is missing', async () => {
       try {
         // @ts-ignore
-        await startServer();
+        await startVerdaccio();
       } catch (e) {
         expect(e.message).toEqual('config file must be an object');
       }

@@ -1,0 +1,99 @@
+{
+	"name": "add-update-versions-test-1",
+	"versions": {
+		"1.0.1": {
+			"name": "add-update-versions-test-1",
+			"version": "1.0.1",
+			"description": "",
+			"main": "index.js",
+			"dependencies": {
+				"test": "^1.4.1"
+			},
+			"author": "",
+			"license": "ISC",
+			"_id": "add-update-versions-test-1@1.0.1",
+			"_npmVersion": "5.5.1",
+			"_npmUser": {
+				"name": "Foo"
+			},
+			"dist": {
+				"integrity": "sha512-zVEqt1JUCOPsash9q4wMkJEDPD+QCx95TRhQII+JnoS31uBUKoZxhzvvUJCcLVy2CQG4QdwXARU7dYWPnrwhGg==",
+				"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+				"tarball": "http://localhost:4873/add-update-versions-test-1/-/add-update-versions-test-1-1.0.1.tgz"
+			},
+			"contributors": []
+		},
+		"1.0.2": {
+			"name": "add-update-versions-test-1",
+			"version": "1.0.2",
+			"description": "",
+			"main": "index.js",
+			"dependencies": {
+				"test": "^1.4.1"
+			},
+			"author": "",
+			"license": "ISC",
+			"_id": "add-update-versions-test-1@1.0.2",
+			"_npmVersion": "5.5.1",
+			"_npmUser": {
+				"name": "Foo"
+			},
+			"dist": {
+				"integrity": "sha512-zVEqt1JUCOPsash9q4wMkJEDPD+QCx95TRhQII+JnoS31uBUKoZxhzvvUJCcLVy2CQG4QdwXARU7dYWPnrwhGg==",
+				"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+				"tarball": "http://localhost:4873/add-update-versions-test-1/-/add-update-versions-test-1-1.0.2.tgz"
+			},
+			"contributors": []
+		},
+		"1.0.4": {
+			"name": "add-update-versions-test-1",
+			"version": "1.0.4",
+			"description": "",
+			"main": "index.js",
+			"dependencies": {
+				"test": "^1.4.1"
+			},
+			"devDependencies": {},
+			"scripts": {
+				"test": "echo \"Error: no test specified\" && exit 1"
+			},
+			"keywords": [],
+			"author": "",
+			"license": "ISC",
+			"_id": "add-update-versions-test-1@1.0.1",
+			"_npmVersion": "5.5.1",
+			"_nodeVersion": "9.3.0",
+			"_npmUser": {},
+			"dist": {
+				"integrity": "sha512-zVEqt1JUCOPsash9q4wMkJEDPD+QCx95TRhQII+JnoS31uBUKoZxhzvvUJCcLVy2CQG4QdwXARU7dYWPnrwhGg==",
+				"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+				"tarball": "http://localhost:4873/add-update-versions-test-1/-/add-update-versions-test-1-1.0.1.tgz"
+			},
+			"contributors": []
+		}
+	},
+	"time": {
+		"modified": "2019-01-29T03:20:04.000Z",
+		"created": "2019-01-29T03:20:00.000Z",
+		"1.0.1": "2019-01-29T03:20:01.000Z",
+		"1.0.2": "2019-01-29T03:20:02.000Z",
+		"1.0.4": "2019-01-29T03:20:04.000Z"
+	},
+	"users": {},
+	"dist-tags": {
+		"latest": "1.0.1",
+		"beta": "1.0.2",
+		"next": "1.0.4"
+	},
+	"_uplinks": {},
+	"_distfiles": {
+		"add-update-versions-test-1-1.0.1.tgz": {
+			"url": "http://localhost:4873/add-update-versions-test-1/-/add-update-versions-test-1-1.0.1.tgz",
+			"sha": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4"
+		}
+	},
+	"_attachments": {},
+	"_rev": "3-642f7166d2b28ca8",
+	"readme": "readme 1.0.4",
+	"_id": "add-update-versions-test-1"
+}

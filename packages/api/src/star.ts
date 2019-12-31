@@ -3,7 +3,7 @@ import {Response} from 'express';
 import _ from 'lodash';
 import { logger } from '@verdaccio/logger';
 
-import {$RequestExtend, $NextFunctionVer, IStorageHandler} from '../../types';
+import {$RequestExtend, $NextFunctionVer, IStorageHandler} from '@verdaccio/dev-types';
 
 export default function(storage: IStorageHandler): (req: $RequestExtend, res: Response, next: $NextFunctionVer) => void {
   const validateInputs = (newUsers, localUsers, username, isStar): boolean => {

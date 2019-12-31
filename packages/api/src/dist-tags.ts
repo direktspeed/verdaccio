@@ -1,11 +1,13 @@
 import mime from 'mime';
 import _ from 'lodash';
-import { media, allow } from '@verdaccio/middleware';
 import{ Router } from 'express';
-import{ IAuth, $ResponseExtend, $RequestExtend, $NextFunctionVer, IStorageHandler } from '../../types';
+
+import { media, allow } from '@verdaccio/middleware';
 import { API_MESSAGE, HTTP_STATUS, DIST_TAGS } from '@verdaccio/dev-commons';
 import { VerdaccioError } from '@verdaccio/commons-api';
 import { Package } from '@verdaccio/types';
+
+import{ IAuth, $ResponseExtend, $RequestExtend, $NextFunctionVer, IStorageHandler } from '@verdaccio/dev-types';
 
 export default function(route: Router, auth: IAuth, storage: IStorageHandler): void {
   const can = allow(auth);

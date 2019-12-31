@@ -7,7 +7,7 @@ import { logger } from '@verdaccio/logger';
 
 import { Config, RemoteUser } from '@verdaccio/types';
 import { Response, Router } from 'express';
-import { $RequestExtend, $ResponseExtend, $NextFunctionVer, IAuth } from '../../types';
+import { $RequestExtend, $ResponseExtend, $NextFunctionVer, IAuth } from '@verdaccio/dev-types';
 
 export default function(route: Router, auth: IAuth, config: Config): void {
   route.get('/-/user/:org_couchdb_user', function(req: $RequestExtend, res: Response, next: $NextFunctionVer): void {

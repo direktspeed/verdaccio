@@ -1,4 +1,4 @@
-import endPointAPI from '@verdaccio/server/src';
+import endPointAPI from '@verdaccio/server';
 import {API_ERROR} from '@verdaccio/dev-commons';
 import { setup } from '@verdaccio/logger';
 

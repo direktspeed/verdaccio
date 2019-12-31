@@ -1,0 +1,72 @@
+{
+	"name": "add-version-test-1",
+	"versions": {
+		"9.0.0": {
+			"name": "add-version-test-1",
+			"version": "9.0.0",
+			"description": "",
+			"main": "index.js",
+			"dependencies": {
+				"test": "^1.4.1"
+			},
+			"author": "",
+			"license": "ISC",
+			"_id": "add-version-test-1@9.0.0",
+			"_npmVersion": "5.5.1",
+			"_npmUser": {
+				"name": "Foo"
+			},
+			"dist": {
+				"integrity": "sha512-zVEqt1JUCOPsash9q4wMkJEDPD+QCx95TRhQII+JnoS31uBUKoZxhzvvUJCcLVy2CQG4QdwXARU7dYWPnrwhGg==",
+				"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+				"tarball": "http://localhost:4873/add-version-test-1/-/add-version-test-1-9.0.0.tgz"
+			},
+			"contributors": []
+		},
+		"1.0.1": {
+			"name": "add-version-test-1",
+			"version": "1.0.1",
+			"description": "",
+			"main": "index.js",
+			"dependencies": {
+				"test": "^1.4.1"
+			},
+			"author": "",
+			"license": "ISC",
+			"_id": "add-version-test-1@1.0.1",
+			"_npmVersion": "5.5.1",
+			"_npmUser": {
+				"name": "Foo"
+			},
+			"dist": {
+				"integrity": "sha512-zVEqt1JUCOPsash9q4wMkJEDPD+QCx95TRhQII+JnoS31uBUKoZxhzvvUJCcLVy2CQG4QdwXARU7dYWPnrwhGg==",
+				"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+				"tarball": "http://localhost:4873/add-version-test-1/-/add-version-test-1-1.0.1.tgz"
+			},
+			"contributors": []
+		}
+	},
+	"time": {
+		"modified": "2019-12-30T23:46:29.605Z",
+		"created": "2019-12-30T23:46:29.605Z",
+		"1.0.1": "2019-12-30T23:46:29.605Z"
+	},
+	"users": {},
+	"dist-tags": {
+		"latest": "9.0.0"
+	},
+	"_uplinks": {},
+	"_distfiles": {},
+	"_attachments": {
+		"add-version-test-1-9.0.0.tgz": {
+			"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4"
+		},
+		"add-version-test-1-1.0.1.tgz": {
+			"shasum": "238e7641e59508dc9c20eb4ad37a8aa57ab777b4",
+			"version": "1.0.1"
+		}
+	},
+	"_rev": "4-bbd6e8ee982f6a3c",
+	"readme": "ERROR: No README data found!",
+	"_id": "add-version-test-1"
+}

@@ -15,5 +15,6 @@ Dockerfile
 *.png
 *.jpg
 *.sh
-test/unit/partials/
+**/partials/**
+**/fixtures/**
 types/custom.d.ts

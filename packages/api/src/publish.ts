@@ -12,7 +12,7 @@ import { logger } from '@verdaccio/logger';
 
 import star from './star';
 
-import { IAuth, $ResponseExtend, $RequestExtend, $NextFunctionVer, IStorageHandler } from '../../types';
+import { IAuth, $ResponseExtend, $RequestExtend, $NextFunctionVer, IStorageHandler } from '@verdaccio/dev-types';
 
 export default function publish(router: Router, auth: IAuth, storage: IStorageHandler, config: Config): void {
   const can = allow(auth);
