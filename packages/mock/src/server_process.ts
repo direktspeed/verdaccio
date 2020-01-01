@@ -1,11 +1,14 @@
 import _ from 'lodash';
-import rimRaf from 'rimraf';
-import {HTTP_STATUS} from '@verdaccio/dev-commons';
 import path from 'path';
+import rimRaf from 'rimraf';
+import assert from 'assert';
 import {fork} from 'child_process';
+
+import {HTTP_STATUS} from '@verdaccio/dev-commons';
 
 import {CREDENTIALS} from './constants';
 import {IVerdaccioConfig, IServerBridge, IServerProcess} from './types';
+const defaultBinPath = require.resolve('verdaccio/bin/verdaccio');
 
 export default class VerdaccioProcess implements IServerProcess {
 
@@ -28,7 +31,8 @@ export default class VerdaccioProcess implements IServerProcess {
     this.cleanStore = cleanStore;
   }
 
-  public init(verdaccioPath = '../../bin/verdaccio'): Promise<any> {
+  public init(verdaccioPath: string = defaultBinPath): Promise<any> {
+    assert(typeof verdaccioPath === 'string', 'verdaccio bin path string is required');
     return new Promise((resolve, reject) => {
       if(this.cleanStore) {
         rimRaf(this.config.storagePath, (err) => {
@@ -45,9 +49,8 @@ export default class VerdaccioProcess implements IServerProcess {
   }
 
   private _start(verdaccioPath: string, resolve: Function, reject: Function) {
-    const verdaccioRegisterWrap: string = path.join(__dirname, verdaccioPath);
     let childOptions = {
-      silent: true
+      silent: false
     };
 
     if (this.isDebug) {
@@ -58,9 +61,9 @@ export default class VerdaccioProcess implements IServerProcess {
         execArgv: [`--inspect=${debugPort}`]
       });
     }
-
+    console.log('-->verdaccioRegisterWrap', verdaccioPath);
     const {configPath, port} = this.config;
-    this.childFork = fork(verdaccioRegisterWrap, ['-c', configPath, '-l', port as string], childOptions);
+    this.childFork = fork(verdaccioPath, ['-c', configPath, '-l', port as string], childOptions);
 
     this.childFork.on('message', (msg) => {
       // verdaccio_started is a message that comes from verdaccio in debug mode that notify has been started
@@ -74,9 +77,15 @@ export default class VerdaccioProcess implements IServerProcess {
       }
     });
 
-    this.childFork.on('error', (err) => reject([err, this]));
-    this.childFork.on('disconnect', (err) => reject([err, this]));
-    this.childFork.on('exit', (err) => reject([err, this]));
+    this.childFork.on('error', (err) => {
+      reject([err, this])
+    });
+    this.childFork.on('disconnect', (err) => {
+      reject([err, this])
+    });
+    this.childFork.on('exit', (err) => {
+      reject([err, this])
+    });
   }
 
   public stop(): void {

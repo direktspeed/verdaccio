@@ -15,10 +15,9 @@
     "prepublish": "in-publish && npm run code:build || not-in-publish",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "pretest": "npm run code:build",
     "test": "npm run test:unit",
     "test:clean": "npx jest --clearCache",
-    "test:unit": "cross-env NODE_ENV=test BABEL_ENV=test TZ=UTC FORCE_COLOR=1 jest --config ./jest.config.js --maxWorkers 2 --passWithNoTests",
+    "test:unit": "cross-env NODE_ENV=test BABEL_ENV=test jest --config ./jest.config.js --maxWorkers 2 --passWithNoTests",
     "test:functional": "cross-env NODE_ENV=test jest --config ./test/jest.config.functional.js --testPathPattern ./test/functional/index* --passWithNoTests",
     "test:e2e": "cross-env BABEL_ENV=test jest --config ./test/jest.config.e2e.js",
     "test:all": "npm run test && npm run test:functional && npm run test:e2e",
@@ -44,8 +43,11 @@
   },
   "homepage": "https://verdaccio.org",
   "dependencies": {
-    "@verdaccio/cli": "^4.3.5-next.1",
-    "@verdaccio/node-api": "^4.3.5-next.1"
+    "@verdaccio/node-api": "^4.3.5-next.1",
+    "request": "2.87.0"
+  },
+  "devDependencies": {
+
   },
   "keywords": [
     "private",

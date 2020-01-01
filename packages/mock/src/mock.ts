@@ -1,11 +1,13 @@
 import path from 'path';
 import fs from 'fs';
+import * as fsExtra from 'fs-extra';
 import os from 'os';
 import {DOMAIN_SERVERS} from './constants';
 import VerdaccioProcess from './server_process';
 import {VerdaccioConfig} from './verdaccio-server';
 import Server from './server';
 import {IServerBridge} from './types';
+
 
 /**
  * Fork a Verdaccio process with a custom configuration.
@@ -50,19 +52,44 @@ import {IServerBridge} from './types';
  * @param port
  * @returns {VerdaccioProcess}
  */
-export function mockServer(port: number) {
+export function mockServer(port: number, options: MockRegistryOptions = {}) {
   const tempRoot = fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir())));
-  fs.copyFileSync(
-    path.join(__dirname, '/config-unit-mock-server-test.yaml'),
-    path.join(tempRoot, 'verdaccio.yaml'),
-  );
   console.log("-->tempRoot", tempRoot);
-  const pathStore = path.join(__dirname, './config/yaml');
-  const configPath = path.join(__dirname, '/config-unit-mock-server-test.yaml');
-  const storePath = path.join(pathStore, '/mock-store');
 
-  const verdaccioConfig = new VerdaccioConfig(storePath, configPath, `http://${DOMAIN_SERVERS}:${port}/`, port);
+  // default locations
+  const configPath = path.join(__dirname,  './config/yaml', '/config-unit-mock-server-test.yaml');
+  const mockStorePath = path.join(__dirname, '/fixtures/mock-store');
+
+  // default options
+  const localOptions: MockRegistryOptions = {
+    port,
+    configPath,
+    storePath: mockStorePath,
+    rootFolder: tempRoot
+  };
+
+  // mix external options
+  const finalOptions: MockRegistryOptions = Object.assign({}, localOptions, options);
+
+
+  // final locations
+  const tempConfigFile = path.join(tempRoot, 'verdaccio.yaml');
+  const storePath = path.join(tempRoot, '/mock-store');
+
+  fs.copyFileSync(finalOptions.configPath!, tempConfigFile);
+  fsExtra.copySync(finalOptions.storePath!, storePath);
+
+  const verdaccioConfig = new VerdaccioConfig(storePath, tempConfigFile, `http://${DOMAIN_SERVERS}:${port}/`, port);
   const server: IServerBridge = new Server(verdaccioConfig.domainPath);
 
   return new VerdaccioProcess(verdaccioConfig, server, false, false, false);
+}
+
+export interface MockRegistryOptions {
+  rootFolder?: string;
+  configPath?: string;
+  port?: number;
+  storePath?: string;
+  silence?: boolean
+  debug?: boolean;
 }

@@ -7,7 +7,7 @@ import publishMetadata from '../../partials/publish-api';
 import forbiddenPlace from '../../partials/forbidden-place';
 import endPointAPI from 'verdaccio/src/server';
 
-import { HEADERS, API_ERROR, HTTP_STATUS, HEADER_TYPE, DIST_TAGS} from '@verdaccio/dev-commons/src/constants';
+import { HEADERS, API_ERROR, HTTP_STATUS, HEADER_TYPE, DIST_TAGS} from '@verdaccio/dev-commons';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 import {mockServer} from '../../__helper/mock';
 import {addUser} from '../../__helper/api';
@@ -39,7 +39,8 @@ describe('endpoint web unit test', () => {
         self_path: store
       }, 'api.web.spec.yaml');
       app = await endPointAPI(configForTest);
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done();
     });
   });

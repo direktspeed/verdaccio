@@ -2,16 +2,15 @@ import request from 'supertest';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import endPointAPI from 'verdaccio/src/server';
+import endPointAPI from '@verdaccio/server';
+import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '@verdaccio/dev-commons';
+import {mockServer} from '@verdaccio/mock';
+import {setup} from '@verdaccio/logger';
+import {buildUserBuffer, buildToken} from '@verdaccio/utils';
 
-import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '@verdaccio/dev-commons/src/constants';
-import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import {buildToken} from '@verdaccio/utils/src/utils';
-import {addUser, getPackage, loginUserToken} from '../../__helper/api';
-import {setup} from '../../../../packages/logger/src/logger';
 import configDefault from '../../partials/config';
-import {buildUserBuffer} from '../../../../packages/utils/src/auth-utils';
+import {addUser, getPackage, loginUserToken} from '../../__helper/api';
 
 setup([]);
 const credentials = { name: 'JotaJWT', password: 'secretPass' };
@@ -47,7 +46,8 @@ describe('endpoint user auth JWT unit test', () => {
       }, 'api-jwt/jwt.yaml');
 
       app = await endPointAPI(configForTest);
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done();
     });
   });

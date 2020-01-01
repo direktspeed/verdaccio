@@ -1,5 +1,5 @@
 import {readFile} from '../lib/test.utils';
-import {API_MESSAGE, HTTP_STATUS} from "@verdaccio/dev-commons/src/constants";
+import {API_MESSAGE, HTTP_STATUS} from "@verdaccio/dev-commons";
 import generatePkg  from '../fixtures/package';
 import {TARBALL} from '../config.functional';
 

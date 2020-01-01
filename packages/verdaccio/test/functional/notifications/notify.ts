@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {HEADERS} from '@verdaccio/dev-commons/src/constants';
+import {HEADERS} from '@verdaccio/dev-commons';
 import {notify} from '@verdaccio/hooks';
 import {DOMAIN_SERVERS, PORT_SERVER_APP} from '../config.functional';
 import { RemoteUser } from '@verdaccio/types';

@@ -4,6 +4,6 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   verbose: true,
-  collectCoverage: false,
+  collectCoverage: true,
   coveragePathIgnorePatterns: ['node_modules', 'fixtures'],
 };

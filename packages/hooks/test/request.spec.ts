@@ -11,7 +11,7 @@ const logger = {
     info: jest.fn(),
   },
 };
-jest.doMock('../../../../src/lib/logger', () => logger);
+jest.doMock('@verdaccio/logger', () => logger);
 
 /**
  * Test Data
@@ -37,7 +37,7 @@ describe('Notifications:: notifyRequest', () => {
       resolver(error, response);
     });
 
-    const notification = require('@verdaccio/hooks/src/notify-request');
+    const notification = require('../src/notify-request');
     const args = [{ errorMessage: 'bad data' }, 'notify service has thrown an error: @{errorMessage}'];
 
     await expect(notification.notifyRequest(options, content)).rejects.toEqual(API_ERROR.BAD_DATA);
@@ -54,7 +54,7 @@ describe('Notifications:: notifyRequest', () => {
       resolver(null, response);
     });
 
-    const notification = require('@verdaccio/hooks/src/notify-request');
+    const notification = require('../src/notify-request');
     const args = [{ errorMessage: 'bad data' }, 'notify service has thrown an error: @{errorMessage}'];
 
     await expect(notification.notifyRequest(options, content)).rejects.toEqual(API_ERROR.BAD_DATA);
@@ -71,7 +71,7 @@ describe('Notifications:: notifyRequest', () => {
       resolver(null, response, response.body);
     });
 
-    const notification = require('@verdaccio/hooks/src/notify-request');
+    const notification = require('../src/notify-request');
     const infoArgs = [{ content }, 'A notification has been shipped: @{content}'];
     const debugArgs = [{ body: 'Successfully delivered' }, ' body: @{body}'];
 
@@ -89,7 +89,7 @@ describe('Notifications:: notifyRequest', () => {
       resolver(null, response);
     });
 
-    const notification = require('@verdaccio/hooks/src/notify-request');
+    const notification = require('../src/notify-request');
     const infoArgs = [{ content }, 'A notification has been shipped: @{content}'];
 
     await expect(notification.notifyRequest(options, content)).rejects.toThrow('body is missing');

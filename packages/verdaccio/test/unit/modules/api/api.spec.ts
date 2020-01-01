@@ -2,8 +2,8 @@ import request from 'supertest';
 import _ from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
-import endPointAPI from '@verdaccio/server';
 
+import endPointAPI from '@verdaccio/server';
 import {
   HEADERS,
   API_ERROR,
@@ -14,9 +14,9 @@ import {
 } from '@verdaccio/dev-commons';
 import {buildToken, encodeScopedUri} from '@verdaccio/utils';
 
+import {mockServer} from '@verdaccio/mock';
 import configDefault from '../../partials/config';
 import publishMetadata from '../../partials/publish-api';
-import {mockServer} from '../../__helper/mock';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
 import {
   getNewToken,
@@ -75,7 +75,8 @@ describe('endpoint unit test', () => {
       }, 'api.spec.yaml');
 
       app = await endPointAPI(configForTest);
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done();
     });
   });

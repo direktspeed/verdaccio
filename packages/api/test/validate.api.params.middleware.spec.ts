@@ -12,9 +12,8 @@ import fs from 'fs';
  app.param('token', validate_name);
  */
 describe('api endpoint app.param()', () => {
-  const file = '../endpoint/index.ts';
   let m;
-  const requirePath = path.normalize(path.join(__dirname + '/../../../../src/api/web/', file));
+  const requirePath = path.normalize(path.join(__dirname, '../src/index.ts'));
   const source = fs.readFileSync(requirePath, 'utf8');
   const very_scary_regexp = /\n\s*app\.(\w+)\s*\(\s*(("[^"]*")|('[^']*'))\s*,/g;
   const appParams = {};

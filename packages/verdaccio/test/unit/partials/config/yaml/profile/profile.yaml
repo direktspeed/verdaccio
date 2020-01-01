@@ -9,7 +9,7 @@ auth:
     file: ./htpasswd
 uplinks:
   npmjs:
-    url: https://registry.npmjs.org/
+    url: https://registry.verdaccio.org/
 security:
   api:
     jwt:
@@ -24,4 +24,4 @@ packages:
     access: $authenticated
     publish: $authenticated
 logs:
-  - { type: stdout, format: pretty, level: http }
+  - { type: stdout, format: pretty, level: warn }

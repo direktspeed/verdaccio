@@ -1,14 +1,16 @@
 import _ from 'lodash';
-import smartRequest, {PromiseAssert} from '../../lib/request';
-import {mockServer} from '../__helper/mock';
-import {HTTP_STATUS} from '@verdaccio/dev-commons/src/constants';
-import { IRequestPromise } from '../../types';
+import {HTTP_STATUS} from '@verdaccio/dev-commons';
 import { VerdaccioError } from '@verdaccio/commons-api';
+
+import smartRequest, {PromiseAssert} from '../src/request';
+import {mockServer} from '../src/mock';
+import { IRequestPromise } from '../src/types';
 
 describe('Request Functional', () => {
   jest.setTimeout(20000);
   const mockServerPort = 55547;
-  const restTest = `http://localhost:${55547}/jquery`;
+  const domainTest = `http://localhost:${55547}`;
+  const restTest = `${domainTest}/jquery`;
   let mockRegistry;
 
   describe('Request Functional', () => {
@@ -27,10 +29,11 @@ describe('Request Functional', () => {
       });
     });
   });
-  describe('smartRequest Rest', () => {
 
+  describe('smartRequest Rest', () => {
     beforeAll(async () => {
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = require.resolve('verdaccio/bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
     });
 
     afterAll(function(done) {
@@ -60,6 +63,18 @@ describe('Request Functional', () => {
         // @ts-ignore
         smartRequest(options).status(HTTP_STATUS.OK).then((result)=> {
           expect(JSON.parse(result).name).toBe('jquery');
+          done();
+        })
+      });
+
+      test('basic ping status and empty response', (done) => {
+        const options: any = {
+          url: `${domainTest}/-/ping`,
+          method: 'GET'
+        };
+        // @ts-ignore
+        smartRequest(options).status(HTTP_STATUS.OK).then((result)=> {
+          expect(JSON.parse((result))).toEqual({});
           done();
         })
       });

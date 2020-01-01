@@ -3,13 +3,14 @@ import _ from 'lodash';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import endPointAPI from 'verdaccio/src/server';
-import {mockServer} from '../../__helper/mock';
-import {parseConfigFile} from '@verdaccio/utils/src/utils';
-import {parseConfigurationFile} from '../../__helper';
+import endPointAPI from '@verdaccio/server';
+import {mockServer} from '@verdaccio/mock';
+import {setup} from '@verdaccio/logger';
+import {API_ERROR, HTTP_STATUS, SUPPORT_ERRORS} from '@verdaccio/dev-commons';
+import {parseConfigFile} from '@verdaccio/utils';
+
 import {getNewToken, getProfile, postProfile} from '../../__helper/api';
-import {setup} from '../../../../packages/logger/src/logger';
-import {API_ERROR, HTTP_STATUS, SUPPORT_ERRORS} from '@verdaccio/dev-commons/src/constants';
+import {parseConfigurationFile} from '../../__helper';
 
 setup([]);
 
@@ -37,7 +38,8 @@ describe('endpoint user profile', () => {
         self_path: store
       });
       app = await endPointAPI(configForTest);
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done();
     });
   });
@@ -51,7 +53,6 @@ describe('endpoint user profile', () => {
     const credentials = { name: 'JotaJWT', password: 'secretPass' };
     const token = await getNewToken(request(app), credentials);
     const [err1, res1] = await getProfile(request(app), token);
-
     expect(err1).toBeNull();
     expect(res1.body.name).toBe(credentials.name);
     done();

@@ -15,7 +15,7 @@ export interface IRequestPromise {
 }
 
 export interface IServerProcess {
-  init(): Promise<any>;
+  init(binPath: string): Promise<any>;
   stop(): void;
 }
 

@@ -39,7 +39,8 @@ describe('StorageTest', () => {
 
   beforeAll(done => {
     rimraf(storagePath, async () => {
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done()
     })
   });

@@ -43,7 +43,8 @@ describe('api with no limited access configuration', () => {
       }, 'pkg.access.spec.yaml');
 
       app = await endPointAPI(configForTest);
-      mockRegistry = await mockServer(mockServerPort).init();
+      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+      mockRegistry = await mockServer(mockServerPort).init(binPath);
       done();
     });
   });

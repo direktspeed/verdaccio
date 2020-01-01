@@ -1,13 +1,14 @@
 import _ from 'lodash';
+import path from "path";
+
 import { Config as AppConfig } from '@verdaccio/config';
 import {Config, UpLinkConf} from '@verdaccio/types';
 import { VerdaccioError } from '@verdaccio/commons-api';
 import {IProxy} from '@verdaccio/dev-types';
 import { API_ERROR, HTTP_STATUS } from "@verdaccio/dev-commons";
 import {setup} from '@verdaccio/logger';
-
-import { ProxyStorage } from '@verdaccio/proxy';
 import { mockServer, configExample, DOMAIN_SERVERS } from '@verdaccio/mock';
+import { ProxyStorage } from '@verdaccio/proxy';
 
 setup([]);
 
@@ -24,7 +25,8 @@ describe('UpStorge', () => {
   };
 
   beforeAll(async () => {
-    mockRegistry = await mockServer(mockServerPort).init();
+    const binPath = path.join(__dirname, '../../../../bin/verdaccio');
+    mockRegistry = await mockServer(mockServerPort).init(binPath);
   });
 
   afterAll(function(done) {
