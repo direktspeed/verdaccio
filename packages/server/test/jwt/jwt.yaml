@@ -8,29 +8,32 @@ auth:
   htpasswd:
     file: ./htpasswd
 uplinks:
-  npmjs:
-    url: https://registry.npmjs.org/
+  remote:
+    url: https://localhost:55546/
 security:
   api:
     jwt:
       sign:
         expiresIn: 10m
         notBefore: 0
+
 packages:
   '@*/*':
     access: $all
     publish: $authenticated
-    proxy: npmjs
+    proxy: remote
   'vue':
     access: $authenticated
     publish: $authenticated
-    proxy: npmjs
+    proxy: remote
   '**':
     access: $all
     publish: $authenticated
-    proxy: npmjs
+    proxy: remote
+
 middlewares:
   audit:
     enabled: true
+
 logs:
-  - { type: stdout, format: pretty, level: http }
+  - { type: stdout, format: pretty, level: warn }

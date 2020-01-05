@@ -18,8 +18,10 @@ packages:
   '@*/*':
     access: $all
     publish: none
+    unpublish: none
   '**':
     access: $all
     publish: none
+    unpublish: none
 
 _debug: true

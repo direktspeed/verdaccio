@@ -32,7 +32,7 @@ export default class VerdaccioProcess implements IServerProcess {
   }
 
   public init(verdaccioPath: string = defaultBinPath): Promise<any> {
-    assert(typeof verdaccioPath === 'string', 'verdaccio bin path string is required');
+    assert(typeof verdaccioPath === 'string', 'verdaccio bin path string is required.');
     return new Promise((resolve, reject) => {
       if(this.cleanStore) {
         rimRaf(this.config.storagePath, (err) => {
@@ -50,7 +50,7 @@ export default class VerdaccioProcess implements IServerProcess {
 
   private _start(verdaccioPath: string, resolve: Function, reject: Function) {
     let childOptions = {
-      silent: false
+      silent: this.silence
     };
 
     if (this.isDebug) {
@@ -58,7 +58,10 @@ export default class VerdaccioProcess implements IServerProcess {
       const debugPort = parseInt(this.config.port, 10) + 5;
 
       childOptions = Object.assign({}, childOptions, {
-        execArgv: [`--inspect=${debugPort}`]
+        execArgv: [`--inspect=${debugPort}`],
+        env: {
+          "NODE_DEBUG": 'request'
+        }
       });
     }
     console.log('-->verdaccioRegisterWrap', verdaccioPath);

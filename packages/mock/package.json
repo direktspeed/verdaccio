@@ -6,15 +6,17 @@
   "main": "./build/index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest",
+    "build:types": "tsc --emitDeclarationOnly",
     "build": "cross-env BABEL_ENV=registry babel src/ --out-dir build/ --copy-files --extensions \".ts,.tsx\" --source-maps inline"
   },
   "dependencies": {
     "fs-extra": "^8.1.0",
     "lodash": "^4.17.15",
-    "request": "2.87.0"
+    "request": "2.87.0",
+    "verdaccio": "^4.4.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "@verdaccio/dev-types": "^4.3.5-next.1",
-    "verdaccio": "^4.4.0"
+    "@verdaccio/dev-types": "^4.3.5-next.1"
   }
 }

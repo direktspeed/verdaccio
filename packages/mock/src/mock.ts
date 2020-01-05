@@ -57,7 +57,7 @@ export function mockServer(port: number, options: MockRegistryOptions = {}) {
   console.log("-->tempRoot", tempRoot);
 
   // default locations
-  const configPath = path.join(__dirname,  './config/yaml', '/config-unit-mock-server-test.yaml');
+  const configPath = path.join(__dirname,  './config/yaml', '/mock-server-test.yaml');
   const mockStorePath = path.join(__dirname, '/fixtures/mock-store');
 
   // default options
@@ -65,12 +65,15 @@ export function mockServer(port: number, options: MockRegistryOptions = {}) {
     port,
     configPath,
     storePath: mockStorePath,
-    rootFolder: tempRoot
+    rootFolder: tempRoot,
+    silence: true,
+    debug: false
   };
 
   // mix external options
   const finalOptions: MockRegistryOptions = Object.assign({}, localOptions, options);
 
+  console.log('--->finalOptions=>', finalOptions);
 
   // final locations
   const tempConfigFile = path.join(tempRoot, 'verdaccio.yaml');
@@ -82,7 +85,7 @@ export function mockServer(port: number, options: MockRegistryOptions = {}) {
   const verdaccioConfig = new VerdaccioConfig(storePath, tempConfigFile, `http://${DOMAIN_SERVERS}:${port}/`, port);
   const server: IServerBridge = new Server(verdaccioConfig.domainPath);
 
-  return new VerdaccioProcess(verdaccioConfig, server, false, false, false);
+  return new VerdaccioProcess(verdaccioConfig, server, finalOptions.silence, finalOptions.debug, false);
 }
 
 export interface MockRegistryOptions {

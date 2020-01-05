@@ -1,18 +1,16 @@
 import request from 'supertest';
 import path from 'path';
-import rimraf from 'rimraf';
 
 import endPointAPI from '@verdaccio/server';
 import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '@verdaccio/dev-commons';
-import {mockServer} from '@verdaccio/mock';
-import {setup} from '@verdaccio/logger';
+import {mockServer, generateRamdonStorage} from '@verdaccio/mock';
+import {setup, logger} from '@verdaccio/logger';
 import {buildUserBuffer, buildToken} from '@verdaccio/utils';
 
-import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import configDefault from '../../partials/config';
-import {addUser, getPackage, loginUserToken} from '../../__helper/api';
+import {configExample, DOMAIN_SERVERS, addUser, getPackage, loginUserToken} from '@verdaccio/mock';
 
 setup([]);
+
 const credentials = { name: 'JotaJWT', password: 'secretPass' };
 
 const FORBIDDEN_VUE = 'authorization required to access package vue';
@@ -23,37 +21,31 @@ describe('endpoint user auth JWT unit test', () => {
   let mockRegistry;
   const FAKE_TOKEN: string = buildToken(TOKEN_BEARER, 'fake');
 
-  beforeAll(function(done) {
-    const store = path.join(__dirname, '../../partials/store/test-jwt-storage');
+  beforeAll(async function(done) {
     const mockServerPort = 55546;
-    rimraf(store, async () => {
-      const configForTest = configDefault({
-        storage: store,
-        uplinks: {
-          npmjs: {
-            url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
-          }
-        },
-        self_path: store,
-        auth: {
-          htpasswd: {
-            file: './test-jwt-storage/.htpasswd_jwt_auth'
-          }
-        },
-        logs: [
-          { type: 'stdout', format: 'pretty', level: 'warn' }
-        ]
-      }, 'api-jwt/jwt.yaml');
+    const store = generateRamdonStorage();
+    const configForTest = configExample({
+      storage: store,
+      uplinks: {
+        remote: {
+          url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
+        }
+      },
+      self_path: store
+    }, 'jwt.yaml', __dirname);
 
-      app = await endPointAPI(configForTest);
-      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
-      mockRegistry = await mockServer(mockServerPort).init(binPath);
-      done();
-    });
+    app = await endPointAPI(configForTest);
+    const binPath = require.resolve('verdaccio/bin/verdaccio');
+    const storePath = path.join(__dirname, '/mock/store');
+    mockRegistry = await mockServer(mockServerPort, { storePath, silence: true }).init(binPath);
+    done();
   });
 
   afterAll(function(done) {
-    mockRegistry[0].stop();
+    const [registry, pid] = mockRegistry;
+    registry.stop();
+    logger.info(`registry ${pid} has been stopped`);
+
     done();
   });
 
@@ -70,6 +62,7 @@ describe('endpoint user auth JWT unit test', () => {
     // testing JWT auth headers with token
     // we need it here, because token is required
     const [err1, resp1] = await getPackage(request(app), token, 'vue');
+
     expect(err1).toBeNull();
     expect(resp1.body).toBeDefined();
     expect(resp1.body.name).toMatch('vue');

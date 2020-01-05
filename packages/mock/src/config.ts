@@ -7,9 +7,15 @@ import {parseConfigFile} from '@verdaccio/utils';
 /**
  * Override the default.yaml configuration file with any new config provided.
  */
-export function configExample(options, url = 'default.yaml') {
-  const locationFile = path.join(__dirname, `./config/yaml/${url}`);
+function configExample(externalConfig, configFile: string = 'default.yaml', location: string) {
+  const locationFile = location ? path.join(location, configFile) :
+    path.join(__dirname, `./config/yaml/${configFile}`);
   const config = parseConfigFile(locationFile);
 
-  return _.assign({}, _.cloneDeep(config), options);
+  return _.assign({}, _.cloneDeep(config), externalConfig);
+}
+
+
+export {
+  configExample
 }

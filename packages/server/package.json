@@ -11,7 +11,8 @@
   "devDependencies": {
     "@verdaccio/dev-types": "^4.3.5-next.1",
     "@verdaccio/mock": "^4.3.5-next.1",
-    "request": "2.87.0"
+    "request": "2.87.0",
+    "verdaccio": "~4.4.0"
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest",

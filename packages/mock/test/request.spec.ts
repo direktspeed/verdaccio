@@ -37,7 +37,10 @@ describe('Request Functional', () => {
     });
 
     afterAll(function(done) {
-      mockRegistry[0].stop();
+      const [registry, pid] = mockRegistry;
+      registry.stop();
+      console.log(`registry ${pid} has been stopped`);
+
       done();
     });
 

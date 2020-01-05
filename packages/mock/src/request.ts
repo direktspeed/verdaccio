@@ -5,7 +5,7 @@ import { IRequestPromise } from './types';
 
 const requestData = Symbol('smart_request_data');
 
-export class PromiseAssert extends Promise<any> implements IRequestPromise{
+export class PromiseAssert extends Promise<any> implements IRequestPromise {
 
   public constructor(options: any) {
     super(options);

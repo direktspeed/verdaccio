@@ -15,6 +15,7 @@ import {
 import {buildToken, encodeScopedUri} from '@verdaccio/utils';
 
 import {mockServer} from '@verdaccio/mock';
+
 import configDefault from '../../partials/config';
 import publishMetadata from '../../partials/publish-api';
 import {DOMAIN_SERVERS} from '../../../functional/config.functional';
