@@ -2,51 +2,49 @@ import request from 'supertest';
 import path from 'path';
 import rimraf from 'rimraf';
 
-import configDefault from '../../partials/config';
-import publishMetadata from '../../partials/publish-api';
-import forbiddenPlace from '../../partials/forbidden-place';
-import endPointAPI from 'verdaccio/src/server';
+import publishMetadata from './partials/publish-api';
+import forbiddenPlace from './partials/forbidden-place';
 
+import endPointAPI from '../../src';
 import { HEADERS, API_ERROR, HTTP_STATUS, HEADER_TYPE, DIST_TAGS} from '@verdaccio/dev-commons';
-import {DOMAIN_SERVERS} from '../../../functional/config.functional';
-import {mockServer} from '../../__helper/mock';
-import {addUser} from '../../__helper/api';
 
-require('../../../../packages/logger/src/logger').setup([]);
+import {addUser, mockServer, DOMAIN_SERVERS, configExample, generateRamdonStorage} from '@verdaccio/mock';
+
+import {setup, logger} from '@verdaccio/logger';
+
+setup([]);
 
 const credentials = { name: 'user-web', password: 'secretPass' };
+
 describe('endpoint web unit test', () => {
   jest.setTimeout(20000);
   let app;
   let mockRegistry;
 
-  beforeAll(function(done) {
-    const store = path.join(__dirname, '../../partials/store/web-api-storage');
+  beforeAll(async (done) => {
+    const store = generateRamdonStorage();
     const mockServerPort = 55544;
-    rimraf(store, async () => {
-      const configForTest = configDefault({
-        auth: {
-          htpasswd: {
-            file: './web-api-storage/.htpasswd-web-api'
-          }
-        },
-        storage: store,
-        uplinks: {
-          npmjs: {
-            url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
-          }
-        },
-        self_path: store
-      }, 'api.web.spec.yaml');
-      app = await endPointAPI(configForTest);
-      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
-      mockRegistry = await mockServer(mockServerPort).init(binPath);
-      done();
-    });
+    const configForTest = configExample({
+      storage: store,
+      self_path: store,
+      uplinks: {
+        remote: {
+          url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
+        }
+      },
+    }, 'web.yaml', __dirname);
+    app = await endPointAPI(configForTest);
+    const binPath = require.resolve('verdaccio/bin/verdaccio');
+    const storePath = path.join(__dirname, '/mock/store');
+    mockRegistry = await mockServer(mockServerPort, { storePath, silence: true }).init(binPath);
+    done();
   });
 
   afterAll(function(done) {
-    mockRegistry[0].stop();
+    const [registry, pid] = mockRegistry;
+    registry.stop();
+    logger.info(`registry ${pid} has been stopped`);
+
     done();
   });
 
@@ -105,6 +103,9 @@ describe('endpoint web unit test', () => {
           .expect(HTTP_STATUS.OK)
           .expect(HEADER_TYPE.CONTENT_TYPE, HEADERS.JSON_CHARSET)
           .end(function(err, res) {
+            // console.log("-->", res);
+            // expect(err).toBeNull();
+
             const sideBarInfo = res.body;
             const latestVersion = publishMetadata.versions[publishMetadata[DIST_TAGS].latest];
 
@@ -207,6 +208,7 @@ describe('endpoint web unit test', () => {
             })
             .expect(HTTP_STATUS.OK)
             .end(function(err, res) {
+              expect(err).toBeNull();
               expect(res.body.error).toBeUndefined();
               expect(res.body.token).toBeDefined();
               expect(res.body.token).toBeTruthy();

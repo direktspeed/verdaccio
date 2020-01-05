@@ -1,20 +1,21 @@
 storage: ./storage_default_storage
-uplinks:
-  npmjs:
-    url: http://localhost:4873/
+auth:
+  htpasswd:
+    file: ./htpasswd
+
 packages:
   '@*/*':
     access: $all
     publish: $all
     proxy: npmjs
-    unpublish: npmjs
+    unpublish: remote
   'forbidden-place':
-    access: nobody
+    access: nobody_can_access_this_package
     publish: $all
   '*':
     access: $all
     publish: $all
     unpublish: xxx
-    proxy: npmjs
+    proxy: remote
 logs:
-  - { type: stdout, format: pretty, level: warn }
+  - { type: stdout, format: pretty, level: error }

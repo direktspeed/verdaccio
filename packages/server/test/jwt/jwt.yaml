@@ -7,16 +7,13 @@ web:
 auth:
   htpasswd:
     file: ./htpasswd
-uplinks:
-  remote:
-    url: https://localhost:55546/
+
 security:
   api:
     jwt:
       sign:
         expiresIn: 10m
         notBefore: 0
-
 packages:
   '@*/*':
     access: $all

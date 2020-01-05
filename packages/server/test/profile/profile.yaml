@@ -1,15 +1,10 @@
 storage: ./storage
 plugins: ./plugins
-
 web:
   title: Verdaccio
-
 auth:
   htpasswd:
     file: ./htpasswd
-uplinks:
-  npmjs:
-    url: https://registry.verdaccio.org/
 security:
   api:
     jwt:

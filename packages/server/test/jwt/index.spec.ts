@@ -4,10 +4,10 @@ import path from 'path';
 import endPointAPI from '@verdaccio/server';
 import {HEADERS, HTTP_STATUS, HEADER_TYPE, TOKEN_BEARER, TOKEN_BASIC, API_ERROR} from '@verdaccio/dev-commons';
 import {mockServer, generateRamdonStorage} from '@verdaccio/mock';
-import {setup, logger} from '@verdaccio/logger';
 import {buildUserBuffer, buildToken} from '@verdaccio/utils';
-
 import {configExample, DOMAIN_SERVERS, addUser, getPackage, loginUserToken} from '@verdaccio/mock';
+
+import {setup, logger} from '@verdaccio/logger';
 
 setup([]);
 

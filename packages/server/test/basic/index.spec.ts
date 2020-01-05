@@ -1,13 +1,12 @@
 import express from 'express';
 import request from 'request';
-import rimraf from 'rimraf';
 import path from "path";
 
 import {API_ERROR} from '@verdaccio/dev-commons';
 import {parseConfigFile} from "@verdaccio/utils";
 import { setup } from '@verdaccio/logger';
 
-import endPointAPI from '../src';
+import endPointAPI from '../../src';
 
 setup([
   {type: 'stdout', format: 'pretty', level: 'trace'}
@@ -17,16 +16,12 @@ const app = express();
 const server = require('http').createServer(app);
 
 const parseConfigurationFile = (conf) => {
-  return path.join(__dirname, `./partials/config/yaml/${conf}`);
+  return path.join(__dirname, `./${conf}`);
 };
 
 describe('basic system test', () => {
   let port;
   jest.setTimeout(20000);
-
-  beforeAll(function(done) {
-    rimraf(__dirname + '/store/test-storage', done);
-  });
 
   beforeAll(async function(done) {
     const config = parseConfigFile(parseConfigurationFile('basic.yaml'));

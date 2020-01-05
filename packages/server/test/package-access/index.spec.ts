@@ -1,64 +1,47 @@
 import request from 'supertest';
 import path from 'path';
-import rimraf from 'rimraf';
 
-import { setup} from '@verdaccio/logger';
+import {setup, logger} from '@verdaccio/logger'
 
 setup([]);
 
 import { HEADERS, HTTP_STATUS } from '@verdaccio/dev-commons';
 import endPointAPI from '@verdaccio/server';
 
-import configDefault from '../../partials/config';
-import {mockServer} from '../../__helper/mock';
-import {DOMAIN_SERVERS} from '../../../functional/config.functional';
+import {generateRamdonStorage, mockServer, configExample, DOMAIN_SERVERS} from '@verdaccio/mock';
 
-require('@verdaccio/logger').setup([]);
 
 describe('api with no limited access configuration', () => {
   let app;
   let mockRegistry;
-  const store = path.join(__dirname, '../../partials/store/access-storage');
+  const store = generateRamdonStorage();
   jest.setTimeout(10000);
 
-  beforeAll(function(done) {
+  beforeAll(async (done) => {
     const mockServerPort = 55530;
+    const configForTest = configExample({
+      self_path: store,
+      uplinks: {
+        remote: {
+          url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
+        }
+      },
+    }, 'pkg.access.yaml', __dirname);
 
-    rimraf(store, async () => {
-      const configForTest = configDefault({
-        auth: {
-          htpasswd: {
-            file: './access-storage/htpasswd-pkg-access'
-          }
-        },
-        self_path: store,
-        uplinks: {
-          remote: {
-            url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
-          }
-        },
-        logs: [
-          { type: 'stdout', format: 'pretty', level: 'warn' }
-        ]
-      }, 'pkg.access.spec.yaml');
-
-      app = await endPointAPI(configForTest);
-      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
-      mockRegistry = await mockServer(mockServerPort).init(binPath);
-      done();
-    });
+    app = await endPointAPI(configForTest);
+    const binPath = require.resolve('verdaccio/bin/verdaccio');
+    const storePath = path.join(__dirname, '/mock/store');
+    mockRegistry = await mockServer(mockServerPort, { storePath, silence: true }).init(binPath);
+    done();
   });
 
-  afterAll(function(done) {
-    rimraf(store, (err) => {
-      if (err) {
-        mockRegistry[0].stop();
-        return done(err);
-      }
 
-      mockRegistry[0].stop();
-      return done();
-    });
+  afterAll(function(done) {
+    const [registry, pid] = mockRegistry;
+    registry.stop();
+    logger.info(`registry ${pid} has been stopped`);
+
+    done();
   });
 
   describe('test proxy packages partially restricted', () => {

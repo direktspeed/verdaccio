@@ -1,7 +1,7 @@
 storage: ./storage_default_storage
-uplinks:
-  remote:
-    url: http://localhost:4873/
+auth:
+  htpasswd:
+    file: ./htpasswd
 packages:
   '@*/*':
     access: $all
@@ -10,4 +10,4 @@ packages:
     access: $all
     proxy: remote
 logs:
-  - { type: stdout, format: pretty, level: trace }
+  - { type: stdout, format: pretty, level: warn }

@@ -1,53 +1,49 @@
 import request from 'supertest';
-import _ from 'lodash';
 import path from 'path';
-import rimraf from 'rimraf';
 
 import endPointAPI from '@verdaccio/server';
 import {mockServer} from '@verdaccio/mock';
-import {setup} from '@verdaccio/logger';
 import {API_ERROR, HTTP_STATUS, SUPPORT_ERRORS} from '@verdaccio/dev-commons';
-import {parseConfigFile} from '@verdaccio/utils';
+import {setup, logger} from '@verdaccio/logger';
 
-import {getNewToken, getProfile, postProfile} from '../../__helper/api';
-import {parseConfigurationFile} from '../../__helper';
+import {generateRamdonStorage, getNewToken, getProfile, postProfile, configExample, DOMAIN_SERVERS} from '@verdaccio/mock';
 
 setup([]);
 
-const parseConfigurationProfile = () => {
-  return parseConfigurationFile(`profile/profile`);
-};
 
 describe('endpoint user profile', () => {
   let app;
   let mockRegistry;
   jest.setTimeout(20000);
 
-  beforeAll(function(done) {
-    const store = path.join(__dirname, '../../partials/store/test-profile-storage');
+  beforeAll(async (done) => {
+    const store = generateRamdonStorage();
     const mockServerPort = 55544;
-    rimraf(store, async () => {
-      const parsedConfig = parseConfigFile(parseConfigurationProfile());
-      const configForTest = _.assign({}, _.cloneDeep(parsedConfig), {
-        storage: store,
-        auth: {
-          htpasswd: {
-            file: './test-profile-storage/.htpasswd-auth-profile'
-          }
-        },
-        self_path: store
-      });
-      app = await endPointAPI(configForTest);
-      const binPath = path.join(__dirname, '../../../../bin/verdaccio');
-      mockRegistry = await mockServer(mockServerPort).init(binPath);
-      done();
-    });
+    const configForTest = configExample({
+      storage: store,
+      uplinks: {
+        remote: {
+          url: `http://${DOMAIN_SERVERS}:${mockServerPort}`
+        }
+      },
+      self_path: store
+    }, 'profile.yaml', __dirname);
+
+    app = await endPointAPI(configForTest);
+    const binPath = require.resolve('verdaccio/bin/verdaccio');
+    const storePath = path.join(__dirname, '/mock/store');
+    mockRegistry = await mockServer(mockServerPort, { storePath, silence: true }).init(binPath);
+    done();
   });
 
   afterAll(function(done) {
-    mockRegistry[0].stop();
+    const [registry, pid] = mockRegistry;
+    registry.stop();
+    logger.info(`registry ${pid} has been stopped`);
+
     done();
   });
+
 
   test('should fetch a profile of logged user', async (done) => {
     const credentials = { name: 'JotaJWT', password: 'secretPass' };
